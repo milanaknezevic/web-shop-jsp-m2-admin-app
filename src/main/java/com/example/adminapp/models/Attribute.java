@@ -1,18 +1,17 @@
 package com.example.adminapp.models;
 
-public class Atribut {
+public class Attribute {
     private Integer id;
     private String naziv;
-    private Integer kategorija_id;
+
     private String tip;
 
-    public Atribut() {
+    public Attribute() {
     }
 
-    public Atribut(Integer id, String naziv, Integer kategorija_id, String tip) {
+    public Attribute(Integer id, String naziv, String tip) {
         this.id = id;
         this.naziv = naziv;
-        this.kategorija_id = kategorija_id;
         this.tip = tip;
     }
 
@@ -32,13 +31,6 @@ public class Atribut {
         this.naziv = naziv;
     }
 
-    public Integer getKategorija_id() {
-        return kategorija_id;
-    }
-
-    public void setKategorija_id(Integer kategorija_id) {
-        this.kategorija_id = kategorija_id;
-    }
 
     public String getTip() {
         return tip;
@@ -53,7 +45,6 @@ public class Atribut {
         return "Atribut{" +
                 "id=" + id +
                 ", naziv='" + naziv + '\'' +
-                ", kategorija_id=" + kategorija_id +
                 ", tip='" + tip + '\'' +
                 '}';
     }

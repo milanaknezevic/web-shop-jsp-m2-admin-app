@@ -2,6 +2,7 @@ package com.example.adminapp.dao;
 
 import com.example.adminapp.models.User;
 import com.example.adminapp.models.enums.Role;
+import com.example.adminapp.models.enums.Status;
 import com.example.adminapp.util.ConnectionPool;
 import com.example.adminapp.util.DAOUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,7 +37,7 @@ public class UserDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 users.add(new User(rs.getInt("id"), rs.getString("ime"), rs.getString("prezime"), rs.getString("korisnicko_ime"), rs.getString("lozinka"),
-                        rs.getString("grad"),rs.getString("avatar"),rs.getString("email"), Role.valueOf(rs.getString("role")), rs.getBoolean("status")));
+                        rs.getString("grad"),rs.getString("avatar"),rs.getString("email"), Role.valueOf(rs.getString("role")), Status.valueOf(rs.getString("status"))));
             }
             ps.close();
         } catch (SQLException e) {
@@ -57,7 +58,7 @@ public class UserDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 user=new User(rs.getInt("id"), rs.getString("ime"), rs.getString("prezime"), rs.getString("korisnicko_ime"), rs.getString("lozinka"),
-                        rs.getString("grad"),rs.getString("avatar"),rs.getString("email"), Role.valueOf(rs.getString("role")), rs.getBoolean("status"));
+                        rs.getString("grad"),rs.getString("avatar"),rs.getString("email"), Role.valueOf(rs.getString("role")), Status.valueOf(rs.getString("status")));
             }
             ps.close();
         } catch (SQLException e) {
@@ -81,7 +82,7 @@ public class UserDAO {
             preparedStatement.setString(5, user.getGrad());
             preparedStatement.setString(6, user.getAvatar());
             preparedStatement.setString(7, user.getEmail());
-            preparedStatement.setBoolean(8, user.isStatus());
+            preparedStatement.setString(8, user.getStatus().toString());
             preparedStatement.setInt(9, user.getId());
             result = preparedStatement.executeUpdate() == 1;
             preparedStatement.close();
@@ -92,13 +93,13 @@ public class UserDAO {
         }
         return result;
     }
-    public static void updateUserStatus(Integer id, String status) {
+    public static void updateUserStatus(Integer id, Status status) {
         Connection connection = null;
 
         try {
             connection = connectionPool.checkOut();
             PreparedStatement preparedStatement = DAOUtil.prepareStatement(connection, UPDATE_USER_STATUS, false);
-            preparedStatement.setString(1, status);
+            preparedStatement.setString(1, String.valueOf(status));
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -122,7 +123,7 @@ public class UserDAO {
             preparedStatement.setString(6, user.getAvatar());
             preparedStatement.setString(7, user.getEmail());
             preparedStatement.setString(8, user.getRole().toString());
-            preparedStatement.setBoolean(9, user.isStatus());
+            preparedStatement.setString(9, user.getStatus().toString());
             result = preparedStatement.executeUpdate() == 1;
             preparedStatement.close();
         } catch (SQLException e) {
