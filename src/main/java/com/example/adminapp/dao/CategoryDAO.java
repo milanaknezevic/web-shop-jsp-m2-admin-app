@@ -1,6 +1,8 @@
 package com.example.adminapp.dao;
 
+import com.example.adminapp.models.Attribute;
 import com.example.adminapp.models.Category;
+import com.example.adminapp.models.Product;
 import com.example.adminapp.util.ConnectionPool;
 import com.example.adminapp.util.DAOUtil;
 
@@ -40,7 +42,7 @@ public class CategoryDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category(rs.getInt("id"), rs.getString("naziv"));
-                category.setAtributi(AtributDAO.getAttributesById(category.getId()));
+                category.setAtributi(AttributeDAO.getAttributesById(category.getId()));
                 category.setProizvodi(ProductDAO.getProductsById(category.getId()));
                 categories.add(category);
             }
@@ -62,7 +64,7 @@ public class CategoryDAO {
             PreparedStatement ps = DAOUtil.prepareStatement(c, SELECT_BY_ID, false);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 category = new Category(rs.getInt("id"), rs.getString("naziv"));
             }
             ps.close();
@@ -83,7 +85,7 @@ public class CategoryDAO {
             PreparedStatement ps = DAOUtil.prepareStatement(c, SELECT_BY_NAME, false);
             ps.setString(1, name);
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 category = new Category(rs.getInt("id"), rs.getString("naziv"));
             }
             ps.close();
@@ -130,5 +132,28 @@ public class CategoryDAO {
         return result;
     }
 
+    public static void deleteCategory(Category category) {
+        Connection c = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            for (Attribute attribute : category.getAtributi()) {
+                AttributeDAO.deleteAttribute(attribute.getId());
+            }
+            for (Product product : category.getProizvodi()) {
+                ProductDAO.deleteProduct(product);
+            }
+            c = connectionPool.checkOut();
+            ps = DAOUtil.prepareStatement(c, DELETE_CATEGORY, false);
+            ps.setInt(1, category.getId());
+            ps.executeQuery();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionPool.checkIn(c);
+        }
+    }
 
 }
