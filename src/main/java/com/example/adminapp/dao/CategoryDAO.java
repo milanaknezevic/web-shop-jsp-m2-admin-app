@@ -66,6 +66,8 @@ public class CategoryDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 category = new Category(rs.getInt("id"), rs.getString("naziv"));
+                category.setAtributi(AttributeDAO.getAttributesById(category.getId()));
+                category.setProizvodi(ProductDAO.getProductsById(category.getId()));
             }
             ps.close();
         } catch (SQLException e) {

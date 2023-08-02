@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class AdminDAO {
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-    private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM korisnik WHERE status=1 and rola=1 and korisnicko_ime=?;";
+    private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM korisnik WHERE status=1 and rola=1 and korisnicko_ime=? and lozinka=?;";
 
     private AdminDAO() {
     }

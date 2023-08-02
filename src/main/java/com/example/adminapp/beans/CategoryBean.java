@@ -30,5 +30,8 @@ public class CategoryBean implements Serializable {
         return CategoryDAO.updateCategory(category);
     }
 
+    public void deleteCategory(Category category) {
+        CategoryDAO.deleteCategory(category);
+    }
 
 }
