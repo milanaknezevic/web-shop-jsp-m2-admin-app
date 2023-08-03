@@ -22,7 +22,7 @@ public class Admin {
     @Getter
     private String email;
     @Getter
-    private Role role;
+    private Role rola;
     @Getter
     private Status status;
     private boolean isLoggedIn;
@@ -30,7 +30,7 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String avatar, String email, Role role, Status status, boolean isLoggedIn) {
+    public Admin(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String avatar, String email, Role rola, Status status, boolean isLoggedIn) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -39,7 +39,7 @@ public class Admin {
         this.grad = grad;
         this.avatar = avatar;
         this.email = email;
-        this.role = role;
+        this.rola = rola;
         this.status = status;
         this.isLoggedIn = isLoggedIn;
     }
@@ -76,8 +76,8 @@ public class Admin {
         this.email = email;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(Role rola) {
+        this.rola = rola;
     }
 
     public void setStatus(Status status) {
@@ -103,7 +103,7 @@ public class Admin {
                 ", grad='" + grad + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
+                ", rola=" + rola +
                 ", status=" + status +
                 ", isLoggedIn=" + isLoggedIn +
                 '}';

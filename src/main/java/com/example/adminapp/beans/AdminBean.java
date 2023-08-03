@@ -11,12 +11,15 @@ public class AdminBean implements Serializable {
     public AdminBean() {
     }
 
-    public Admin getUser(String username, String password) {
+    public boolean login(String username, String password) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
         Admin admin = AdminDAO.getUserByUsername(username);
+        admin.setLoggedIn(true);
 
-        return admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka()) ? admin : null;
+        // return admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka()) ? admin : null;
+        return admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka());
+
     }
 
 

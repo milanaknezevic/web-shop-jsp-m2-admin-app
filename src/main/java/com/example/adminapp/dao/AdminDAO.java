@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class AdminDAO {
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-    private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM korisnik WHERE status=1 and rola=1 and korisnicko_ime=? and lozinka=?;";
+    private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM korisnik WHERE status=1 and rola=0 and korisnicko_ime=?;";
 
     private AdminDAO() {
     }
@@ -36,9 +36,9 @@ public class AdminDAO {
                         rs.getString("grad"),
                         rs.getString("avatar"),
                         rs.getString("email"),
-                        Role.valueOf(rs.getString("role")),
-                        Status.valueOf(rs.getString("status")),
-                        rs.getBoolean("isLoggedIn"));
+                        Role.fromValue(rs.getInt("rola")), // Ovde koristimo metodu za mapiranje
+                        Status.fromValue(rs.getInt("status")),
+                        false);
             }
             ps.close();
         } catch (SQLException e) {

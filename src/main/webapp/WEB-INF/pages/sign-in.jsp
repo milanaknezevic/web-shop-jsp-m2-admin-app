@@ -27,7 +27,7 @@
     <h2>Login Page</h2>
     <p class="p" id="notificationMessage"><%=session.getAttribute("notification").toString()%>
     </p>
-    <form>
+    <form method="post" action="?action=sign-in">
         <div class="user-box">
             <input type="text" id="korisnicko_ime" name="korisnicko_ime" required>
             <label>Username</label>
@@ -37,7 +37,6 @@
             <label>Password</label>
         </div>
         <button class="btn" name="submit" type="submit">Sign in</button>
-
     </form>
 
 
