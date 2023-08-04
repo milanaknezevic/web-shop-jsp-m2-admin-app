@@ -10,6 +10,14 @@ public class UserBean implements Serializable {
 
     private User user;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public List<User> getAll() {
         return UserDAO.getAllUsers();
     }

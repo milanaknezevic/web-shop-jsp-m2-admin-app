@@ -1,6 +1,8 @@
 <%@ page import="com.example.adminapp.models.User" %>
 <%@ page import="com.example.adminapp.beans.UserBean" %>
 <%@ page import="com.example.adminapp.dao.UserDAO" %>
+<%@ page import="com.example.adminapp.models.Log" %>
+<%@ page import="com.example.adminapp.dao.LogDAO" %>
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +23,7 @@
     <link rel="stylesheet" href="styles/users.css">
 
 
-    <title>Users</title>
+    <title>Logs</title>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable(); // myTable je ID vaše tabele
@@ -37,79 +39,44 @@
 <div class="container-lg" style="padding-top: 20px">
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h2>Users</h2>
+            <div  class="table-title">
+                <div  class="row">
+                    <div  class="col-sm-6">
+                        <h2>Logs</h2>
                     </div>
                 </div>
             </div>
 
-          <div style="margin-bottom: 10px">
-              <button type="button" class="mjau" onclick="location.href='?action=add-new-user'">
-                  <span class="fa fa-plus"></span>
-                  Add new user
-              </button>
-          </div>
             <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
                     <th style="color:  #1690A7" scope="col">Id</th>
-                    <th style="color:  #1690A7" scope="col">First name</th>
-                    <th style="color:  #1690A7" scope="col">Last name</th>
-                    <th style="color:  #1690A7" scope="col">Username</th>
-                    <th style="width: 22%; color: #1690A7" scope="col">E-mail</th>
-                    <th style="color:  #1690A7" scope="col">City</th>
-                    <th style="color:  #1690A7" scope="col">Avatar URL</th>
-                    <th style="color:  #1690A7" scope="col">Status</th>
-                    <th style="color:  #1690A7" scope="col">Actions</th>
+                    <th style="color:  #1690A7;width: fit-content" scope="col">Message</th>
+                    <th style="color:  #1690A7;width: fit-content" scope="col">Level</th>
+                    <th style="color:  #1690A7;width: fit-content" scope="col">Log</th>
+                    <th style="color:  #1690A7" scope="col">Date</th>
+
 
                 </tr>
                 </thead>
                 <tbody>
-                <% for (User user : UserDAO.getAllUsers()) {%>
+                <% for (Log log : LogDAO.getAllLogs()) {%>
                 <tr>
                     <td>
-                        <%= user.getId() %>
+                        <%= log.getId() %>
 
-                    </td>
-                    <td>
-                        <%= user.getIme() %>
-                    </td>
-                    <td>
-                        <%=user.getPrezime() %>
-                    </td>
-                    <td>
-                        <%= user.getKorisnicko_ime() %>
                     </td>
                     <td style="word-wrap: break-word">
-                        <%=user.getEmail() %>
+                        <%= log.getPoruka() %>
                     </td>
                     <td>
-                        <%=user.getGrad()%>
+                        <%=log.getLevel() %>
+                    </td>
+                    <td style="word-wrap: break-word">
+                        <%=log.getLog() %>
                     </td>
                     <td>
-                        <%=user.getAvatar()%>
-                    </td>
-                    <td>
-                        <%= user.getStatus() %>
-                    </td>
-
-                    <td>
-                        <div class="d-flex flex-row">
-
-                            <button style="width: fit-content" type="button" class="btn" title="Edit"
-                                    onclick="location.href='?action=update-user&id=<%=user.getId()%>'">
-                                <span style="width: fit-content" class="fa fa-pencil text-dark"></span>
-                            </button>
-
-
-                            <button style="width: fit-content" type="button" class="btn" title="Delete"
-                                    onclick="location.href='?action=delete-user&id=<%=user.getId()%>'">
-                                <span style="width: fit-content" class="fa fa-trash text-danger"></span>
-                            </button>
-
-                        </div>
+                        <%=log.getDatum() %>
                     </td>
 
                 </tr>

@@ -21,7 +21,7 @@ public class UserDAO {
 
     private static final String SELECT_ALL_USERS = "SELECT * FROM webshop_ip.korisnik";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM korisnik WHERE id=?;";
-    private static final String UPDATE_USER = "UPDATE korisnik  SET ime=?, prezime=?, korisnicko_ime=?, lozinka=?, grad=?,avatar=?, email=?, status=? WHERE id=?;";
+    private static final String UPDATE_USER = "UPDATE webshop_ip.korisnik SET ime = ?, prezime = ?, korisnicko_ime =?, grad =?, avatar = ?, email = ?, rola = ?,status=? WHERE (id = ?);";
     private static final String UPDATE_USER_STATUS = "UPDATE korisnik  SET status=? WHERE id=?;";
     private static final String INSERT_USER = "INSERT INTO  webshop_ip.korisnik (ime, prezime, korisnicko_ime, lozinka, grad, avatar, email,rola, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -69,9 +69,17 @@ public class UserDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                user = new User(rs.getInt("id"), rs.getString("ime"), rs.getString("prezime"), rs.getString("korisnicko_ime"), rs.getString("lozinka"),
-                        rs.getString("grad"), rs.getString("avatar"), rs.getString("email"),
-                        Role.valueOf(rs.getString("rola")), Status.valueOf(rs.getString("status")));
+                user = new User(
+                        rs.getInt("id"),
+                        rs.getString("ime"),
+                        rs.getString("prezime"),
+                        rs.getString("korisnicko_ime"),
+                        rs.getString("lozinka"),
+                        rs.getString("grad"),
+                        rs.getString("avatar"),
+                        rs.getString("email"),
+                        Role.fromValue(rs.getInt("rola")), // Ovde koristimo metodu za mapiranje
+                        Status.fromValue(rs.getInt("status")));
             }
             ps.close();
         } catch (SQLException e) {
@@ -91,11 +99,13 @@ public class UserDAO {
             preparedStatement.setString(1, user.getIme());
             preparedStatement.setString(2, user.getPrezime());
             preparedStatement.setString(3, user.getKorisnicko_ime());
-            preparedStatement.setString(4, passwordEncoder.encode(user.getLozinka()));
-            preparedStatement.setString(5, user.getGrad());
-            preparedStatement.setString(6, user.getAvatar());
-            preparedStatement.setString(7, user.getEmail());
-            preparedStatement.setString(8, user.getStatus().toString());
+            preparedStatement.setString(4, user.getGrad());
+            preparedStatement.setString(5, user.getAvatar());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setInt(7, Role.toValue(user.getRole()));
+            preparedStatement.setInt(8, Status.toValue(user.getStatus()));
+            // preparedStatement.setString(4, passwordEncoder.encode(user.getLozinka()));
+            // preparedStatement.setInt(8, Status.toValue(user.getStatus()));
             preparedStatement.setInt(9, user.getId());
             result = preparedStatement.executeUpdate() == 1;
             preparedStatement.close();
@@ -113,7 +123,7 @@ public class UserDAO {
         try {
             connection = connectionPool.checkOut();
             PreparedStatement preparedStatement = DAOUtil.prepareStatement(connection, UPDATE_USER_STATUS, false);
-            preparedStatement.setString(1, String.valueOf(status));
+            preparedStatement.setInt(1, Status.toValue(status));
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
