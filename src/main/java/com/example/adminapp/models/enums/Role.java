@@ -16,4 +16,17 @@ public enum Role {
             throw new IllegalArgumentException("Nepoznata vrednost za Role: " + value);
         }
     }
+    public static int toValue(Role value) {
+        if (value == ADMIN) {
+            return 0;
+        } if (value == KORISNICKA_PODRSKA) {
+            return 1;
+        } if (value == OBICNI_KORISNIK) {
+            return 2;
+        }
+        else {
+            throw new IllegalArgumentException("Nepoznata vrednost za Role: " + value);
+        }
+    }
+
 }

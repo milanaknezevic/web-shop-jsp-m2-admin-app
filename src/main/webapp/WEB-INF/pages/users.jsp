@@ -16,9 +16,18 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="styles/users.css">
 
+
     <title>Users</title>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable(); // myTable je ID vaše tabele
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             // Activate tooltips
@@ -70,18 +79,20 @@
                 </div>
             </div>
 
-            <button type="button" class="mjau" onclick="location.href='?action=add-user'">
-                <span class="fa fa-plus"></span>
-                Add new user
-            </button>
-            <table class="table table-striped">
+          <div style="margin-bottom: 10px">
+              <button type="button" class="mjau" onclick="location.href='?action=add-new-user'">
+                  <span class="fa fa-plus"></span>
+                  Add new user
+              </button>
+          </div>
+            <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
                     <th style="color:  #1690A7" scope="col">Id</th>
                     <th style="color:  #1690A7" scope="col">First name</th>
                     <th style="color:  #1690A7" scope="col">Last name</th>
                     <th style="color:  #1690A7" scope="col">Username</th>
-                    <th style="width: 20%; color: #1690A7" scope="col">E-mail</th>
+                    <th style="width: 22%; color: #1690A7" scope="col">E-mail</th>
                     <th style="color:  #1690A7" scope="col">City</th>
                     <th style="color:  #1690A7" scope="col">Avatar URL</th>
                     <th style="color:  #1690A7" scope="col">Status</th>
@@ -105,7 +116,7 @@
                     <td>
                         <%= user.getKorisnicko_ime() %>
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%=user.getEmail() %>
                     </td>
                     <td>
@@ -121,16 +132,16 @@
                     <td>
                         <div class="d-flex flex-row">
 
-                                <button  style="width: fit-content" type="button" class="btn"
-                                        onclick="location.href='?action=update-user&id=<%=user.getId()%>'">
-                                    <span style="width: fit-content" class="fa fa-pencil text-dark"></span>
-                                </button>
+                            <button style="width: fit-content" type="button" class="btn"
+                                    onclick="location.href='?action=update-user&id=<%=user.getId()%>'">
+                                <span style="width: fit-content" class="fa fa-pencil text-dark"></span>
+                            </button>
 
 
-                                <button style="width: fit-content" type="button" class="btn"
-                                        onclick="location.href='?action=delete-user&id=<%=user.getId()%>'">
-                                    <span  style="width: fit-content" class="fa fa-trash text-danger"></span>
-                                </button>
+                            <button style="width: fit-content" type="button" class="btn"
+                                    onclick="location.href='?action=delete-user&id=<%=user.getId()%>'">
+                                <span style="width: fit-content" class="fa fa-trash text-danger"></span>
+                            </button>
 
                         </div>
                     </td>

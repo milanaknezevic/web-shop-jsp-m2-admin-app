@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.io.Serializable;
 
 public class AdminBean implements Serializable {
+    private boolean isLoggedIn = false;
 
     public AdminBean() {
     }
@@ -15,11 +16,19 @@ public class AdminBean implements Serializable {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
         Admin admin = AdminDAO.getUserByUsername(username);
-        admin.setLoggedIn(true);
 
-        // return admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka()) ? admin : null;
-        return admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka());
+        if (admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka())) {
+            isLoggedIn = true;
+            return true;
+        } else {
+            return false;
+        }
+        // return admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka());
 
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
 

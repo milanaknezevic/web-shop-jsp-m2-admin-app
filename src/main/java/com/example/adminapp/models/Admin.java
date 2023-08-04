@@ -25,12 +25,12 @@ public class Admin {
     private Role rola;
     @Getter
     private Status status;
-    private boolean isLoggedIn;
+
 
     public Admin() {
     }
 
-    public Admin(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String avatar, String email, Role rola, Status status, boolean isLoggedIn) {
+    public Admin(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String avatar, String email, Role rola, Status status) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -41,7 +41,7 @@ public class Admin {
         this.email = email;
         this.rola = rola;
         this.status = status;
-        this.isLoggedIn = isLoggedIn;
+
     }
 
     public void setId(Integer id) {
@@ -84,14 +84,6 @@ public class Admin {
         this.status = status;
     }
 
-    public boolean isLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
-    }
-
     @Override
     public String toString() {
         return "Admin{" +
@@ -105,7 +97,6 @@ public class Admin {
                 ", email='" + email + '\'' +
                 ", rola=" + rola +
                 ", status=" + status +
-                ", isLoggedIn=" + isLoggedIn +
                 '}';
     }
 }

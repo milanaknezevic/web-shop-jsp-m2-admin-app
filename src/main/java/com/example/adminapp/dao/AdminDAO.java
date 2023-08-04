@@ -37,8 +37,7 @@ public class AdminDAO {
                         rs.getString("avatar"),
                         rs.getString("email"),
                         Role.fromValue(rs.getInt("rola")), // Ovde koristimo metodu za mapiranje
-                        Status.fromValue(rs.getInt("status")),
-                        false);
+                        Status.fromValue(rs.getInt("status")));
             }
             ps.close();
         } catch (SQLException e) {

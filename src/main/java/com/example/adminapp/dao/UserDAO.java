@@ -23,7 +23,7 @@ public class UserDAO {
     private static final String SELECT_USER_BY_ID = "SELECT * FROM korisnik WHERE id=?;";
     private static final String UPDATE_USER = "UPDATE korisnik  SET ime=?, prezime=?, korisnicko_ime=?, lozinka=?, grad=?,avatar=?, email=?, status=? WHERE id=?;";
     private static final String UPDATE_USER_STATUS = "UPDATE korisnik  SET status=? WHERE id=?;";
-    private static final String INSERT_USER = "INSERT INTO user (ime, prezime, korisnicko_ime, lozinka, grad, avatar, email,rola, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String INSERT_USER = "INSERT INTO  webshop_ip.korisnik (ime, prezime, korisnicko_ime, lozinka, grad, avatar, email,rola, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     public UserDAO() {
     }
@@ -137,9 +137,12 @@ public class UserDAO {
             preparedStatement.setString(5, user.getGrad());
             preparedStatement.setString(6, user.getAvatar());
             preparedStatement.setString(7, user.getEmail());
-            preparedStatement.setString(8, user.getRole().toString());
-            preparedStatement.setString(9, user.getStatus().toString());
+            //preparedStatement.setString(8, user.getRole().toString());
+            //preparedStatement.setString(9, user.getStatus().toString());
+            preparedStatement.setInt(8, Role.toValue(user.getRole()));
+            preparedStatement.setInt(9, Status.toValue(user.getStatus()));
             result = preparedStatement.executeUpdate() == 1;
+
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();

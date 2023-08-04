@@ -4,6 +4,9 @@ import com.example.adminapp.beans.AdminBean;
 import com.example.adminapp.beans.CategoryBean;
 import com.example.adminapp.beans.LogBean;
 import com.example.adminapp.beans.UserBean;
+import com.example.adminapp.models.User;
+import com.example.adminapp.models.enums.Role;
+import com.example.adminapp.models.enums.Status;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +21,9 @@ import java.io.IOException;
 public class AdminController extends HttpServlet {
     private static final String SIGN_IN = "/WEB-INF/pages/sign-in.jsp";
     private static final String USERS = "/WEB-INF/pages/users.jsp";
+    private static final String ADD_USER = "/WEB-INF/pages/add-new-user.jsp";
     private static final String ERROR = "/WEB-INF/pages/error.jsp";
+
     public AdminController() {
         super();
     }
@@ -39,9 +44,9 @@ public class AdminController extends HttpServlet {
         } else if (action.equals("sign-in")) {
             String username = request.getParameter("korisnicko_ime");
             String password = request.getParameter("lozinka");
-            AdminBean admin = new AdminBean();
-            if (admin.login(username, password)) {
-                session.setAttribute("admin", admin);
+            AdminBean adminBean = new AdminBean();
+            if (adminBean.login(username, password)) {
+                session.setAttribute("adminBean", adminBean);
                 LogBean logBean = new LogBean();
                 UserBean userBean = new UserBean();
                 CategoryBean categoryBean = new CategoryBean();
@@ -49,15 +54,39 @@ public class AdminController extends HttpServlet {
                 session.setAttribute("userBean", userBean);
                 session.setAttribute("categoryBean", categoryBean);
                 address = USERS;
+            } else {
+                session.setAttribute("notification", "Invalid credentials!");
             }
-            else {
-                session.setAttribute("notification","Invalid credentials!");
-            }
-        }
-        else {
-          /*  AdminBean adminBean = (AdminBean) session.getAttribute("adminBean");
+        } else {
+            AdminBean adminBean = (AdminBean) session.getAttribute("adminBean");
             if (adminBean == null || !adminBean.isLoggedIn()) {
-                address = SIGN_IN;*/
+                address = SIGN_IN;
+            } else {
+                UserBean userBean = (UserBean) session.getAttribute("userBean");
+                CategoryBean categoryBean = (CategoryBean) session.getAttribute("categoryBean");
+                switch (action) {
+                    case "users":
+                        address = USERS;
+                        break;
+                    case "add-new-user":
+                        address = ADD_USER;
+                        if (request.getParameter("submit") != null) {
+                            String roleValue = request.getParameter("rola");
+                            Role role = Role.fromValue(Integer.parseInt(roleValue));
+                            User user = new User(0, request.getParameter("firstName"), request.getParameter("lastName"),
+                                    request.getParameter("username"), request.getParameter("password"),
+                                    request.getParameter("city"), request.getParameter("avatar"),
+                                    request.getParameter("email"),
+                                    role, Status.ACTIVE);
+                            System.out.println("user" + user);
+
+                            if (userBean.addUser(user)) {
+                                address = USERS;
+                            }
+                        }
+                        break;
+                }
+            }
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
