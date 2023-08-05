@@ -58,7 +58,7 @@
                     <th style="color:  #1690A7;width: fit-content" scope="col">Id</th>
                     <th style="color:  #1690A7;width: fit-content" scope="col">Name</th>
                     <th style="color:  #1690A7;width: fit-content" scope="col">Type</th>
-
+                    <th style="color:  #1690A7;width: fit-content" scope="col">Actions</th>
 
                 </tr>
                 </thead>
@@ -75,7 +75,15 @@
                     <td>
                         <%=attribute.getTip() %>
                     </td>
+                    <td>
+                        <div class="d-flex flex-row">
+                            <button style="width: fit-content" type="button" class="btn" title="Delete"
+                                    onclick="location.href='?action=delete-attribute&id=<%=attribute.getId()%>'">
+                                <span style="width: fit-content" class="fa fa-trash text-danger"></span>
+                            </button>
 
+                        </div>
+                    </td>
 
                 </tr>
                 <% } %>

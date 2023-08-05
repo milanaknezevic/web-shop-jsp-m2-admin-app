@@ -10,6 +10,14 @@ public class CategoryBean implements Serializable {
 
     private Category category;
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public List<Category> getAll() {
         return CategoryDAO.getAllCategories();
     }

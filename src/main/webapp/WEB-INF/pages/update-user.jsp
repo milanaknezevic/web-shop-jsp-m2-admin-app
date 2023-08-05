@@ -29,6 +29,7 @@
 <br>
 <div style="text-align: center"><h1>Update user</h1></div>
 <div class="card border-primary mb-3 center" style="max-width: 50rem;">
+
     <div class="card-body">
         <div class="card-body">
             <form class="form-add-user" method="POST" action="?action=update-user&id=<%=userBean.getUser().getId()%>">
@@ -83,7 +84,7 @@
                            data-validation-allowing="jpg, png, gif" data-validation-max-size="10M"
                            value="<%=userBean.getUser().getAvatar()%>">
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">Update user</button>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

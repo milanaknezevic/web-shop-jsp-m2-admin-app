@@ -86,7 +86,7 @@
                         <div class="d-flex flex-row">
 
                             <button style="width: fit-content" type="button" class="btn" title="Edit"
-                                    onclick="location.href='?action=update-user&id=<%=category.getId()%>'">
+                                    onclick="location.href='?action=update-category&id=<%=category.getId()%>'">
                                 <span style="width: fit-content" class="fa fa-pencil text-dark"></span>
                             </button>
 

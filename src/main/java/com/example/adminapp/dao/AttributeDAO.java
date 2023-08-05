@@ -1,6 +1,9 @@
 package com.example.adminapp.dao;
 
 import com.example.adminapp.models.Attribute;
+import com.example.adminapp.models.User;
+import com.example.adminapp.models.enums.Role;
+import com.example.adminapp.models.enums.Status;
 import com.example.adminapp.util.ConnectionPool;
 import com.example.adminapp.util.DAOUtil;
 
@@ -14,9 +17,10 @@ import java.util.List;
 public class AttributeDAO {
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
     private static final String INSERT= "INSERT INTO  webshop_ip.atribut (naziv,kategorija_id,tip) values (?,?,?);";
-    private static final String UPDATE="UPDATE web_shop.user set name=?, type=? where id=?";
+    private static final String UPDATE="UPDATE webshop_ip.atribut set naziv=?, tip=? where id=?;";
     private static final String DELETE = "DELETE FROM webshop_ip.atribut WHERE id = ?;";
     private static final String SELECT_ALL_BY_CATEGORY_ID="SELECT * FROM webshop_ip.atribut a where a.kategorija_id=?;";
+    private static final String SELECT_BY_ID="SELECT * FROM webshop_ip.atribut WHERE id = ?;";
 
     public static boolean insertAttribute(Attribute attribute,Integer category_id) {
         Connection c = null;
@@ -48,6 +52,7 @@ public class AttributeDAO {
             ps = DAOUtil.prepareStatement(c, UPDATE, false);
             ps.setString(1,attribute.getNaziv());
             ps.setString(2,attribute.getTip());
+            ps.setInt(3, attribute.getId());
             result=ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,6 +98,31 @@ public class AttributeDAO {
             connectionPool.checkIn(c);
         }
         return attributes;
+    }
+    public static Attribute getAttributeById(Integer id)
+    {
+        Attribute attribute = null;
+        Connection c = null;
+        ResultSet rs = null;
+        try {
+            c = connectionPool.checkOut();
+            PreparedStatement ps = DAOUtil.prepareStatement(c, SELECT_BY_ID, false);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                attribute = new Attribute(
+                        rs.getInt("id"),
+                        rs.getString("naziv"),
+                        rs.getString("tip")
+                       );
+            }
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionPool.checkIn(c);
+        }
+        return attribute;
     }
 
 }

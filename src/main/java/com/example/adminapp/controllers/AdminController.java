@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Enumeration;
 
 @WebServlet(name = "adminController", value = "/admin-controller")
 public class AdminController extends HttpServlet {
@@ -28,6 +29,7 @@ public class AdminController extends HttpServlet {
     private static final String CATEGORIES = "/WEB-INF/pages/categories.jsp";
     private static final String VIEW_ATTRIBUTES = "/WEB-INF/pages/view-attributes.jsp";
     private static final String ADD_CATEGORY = "/WEB-INF/pages/add-new-category.jsp";
+    private static final String UPDATE_CATEGORY = "/WEB-INF/pages/update-category.jsp";
     private static final String ERROR = "/WEB-INF/pages/error.jsp";
 
     public AdminController() {
@@ -47,7 +49,7 @@ public class AdminController extends HttpServlet {
             address = SIGN_IN;
         } else if (action.equals("sign-out")) {
             session.invalidate();
-            response.sendRedirect(request.getContextPath()+"/admin-controller");
+            response.sendRedirect(request.getContextPath() + "/admin-controller");
             return;
         } else if (action.equals("sign-in")) {
             String username = request.getParameter("korisnicko_ime");
@@ -161,8 +163,55 @@ public class AdminController extends HttpServlet {
                                 address = CATEGORIES;
                             }
                         }
+                        break;
+                    case "update-category":
+                        address = UPDATE_CATEGORY;
+                        int updateCategoryId = Integer.parseInt(request.getParameter("id"));
+                        Category updateCategory = CategoryBean.getById(updateCategoryId);
+                        categoryBean.setCategory(updateCategory);
+                        if (request.getParameter("submit") != null) {
+                            String categoryName1 = request.getParameter("name");
+                            updateCategory.setNaziv(categoryName1);
+                            //update kategoriju
+                            categoryBean.update(updateCategory);
 
+                            // Ovdje ćemo koristiti ključ "name" polja kako bismo dohvatili poslane atribute
+                            Enumeration<String> parameterNames = request.getParameterNames();
+                            while (parameterNames.hasMoreElements()) {
+                                String paramName = parameterNames.nextElement();
+                                if (paramName.startsWith("attributeName_")) {
+                                    int attributeId = Integer.parseInt(paramName.substring("attributeName_".length()));
+                                    String attributeName = request.getParameter("attributeName_" + attributeId);
+                                    String attributeType = request.getParameter("type_" + attributeId);
+                                    System.out.println("attributeType " + attributeType);
+                                    String tip="";
+                                    if(attributeType.equals("0"))
+                                    {
+                                        tip="STRING";
+                                    }
+                                    else if(attributeType.equals("1"))
+                                    {
+                                        tip="INT";
+                                    }
+                                    else {
+                                        tip="DOUBLE";
+                                    }
 
+                                    Attribute attribute=new Attribute(attributeId,attributeName,tip);
+                                    System.out.println("atribut " + attribute);
+                                    attributeBean.update(attribute);
+
+                                }
+                            }
+
+                            address = CATEGORIES;
+                        }
+                        break;
+                    case "delete-attribute":
+                        int id2 = Integer.parseInt(request.getParameter("id"));
+                        System.out.println("id atributa koji brisem " +id2);
+                        attributeBean.deleteAttribute(id2);
+                        address = VIEW_ATTRIBUTES;
                         break;
                     default:
                         address = ERROR;
