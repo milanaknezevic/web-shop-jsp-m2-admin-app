@@ -47,7 +47,7 @@ public class ImageDAO {
             c = connectionPool.checkOut();
             ps = DAOUtil.prepareStatement(c, DELETE_IMAGE, false);
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

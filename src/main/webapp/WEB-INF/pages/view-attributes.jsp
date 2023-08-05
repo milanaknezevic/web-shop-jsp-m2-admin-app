@@ -3,6 +3,8 @@
 <%@ page import="com.example.adminapp.dao.UserDAO" %>
 <%@ page import="com.example.adminapp.models.Log" %>
 <%@ page import="com.example.adminapp.dao.LogDAO" %>
+<%@ page import="com.example.adminapp.models.Attribute" %>
+<%@ page import="com.example.adminapp.dao.AttributeDAO" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,13 +25,16 @@
     <link rel="stylesheet" href="styles/users.css">
 
 
-    <title>Logs</title>
+    <title>Attributes</title>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#myTable').DataTable(); // myTable je ID vaše tabele
         });
     </script>
-
+    <%
+        String categoryIdParam = request.getParameter("id");
+        int categoryId = Integer.parseInt(categoryIdParam);
+    %>
 
 
 </head>
@@ -39,10 +44,10 @@
 <div class="container-lg" style="padding-top: 20px">
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div  class="table-title">
-                <div  class="row">
-                    <div  class="col-sm-6">
-                        <h2>Logs</h2>
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Attributes</h2>
                     </div>
                 </div>
             </div>
@@ -50,34 +55,27 @@
             <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
-                    <th style="color:  #1690A7" scope="col">Id</th>
-                    <th style="color:  #1690A7;width: fit-content" scope="col">Message</th>
-                    <th style="color:  #1690A7;width: 5%" scope="col">Level</th>
-                    <th style="color:  #1690A7;width: fit-content" scope="col">Log</th>
-                    <th style="color:  #1690A7" scope="col">Date</th>
+                    <th style="color:  #1690A7;width: fit-content" scope="col">Id</th>
+                    <th style="color:  #1690A7;width: fit-content" scope="col">Name</th>
+                    <th style="color:  #1690A7;width: fit-content" scope="col">Type</th>
 
 
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Log log : LogDAO.getAllLogs()) {%>
+                <% for (Attribute attribute : AttributeDAO.getAttributesById(categoryId)) {%>
                 <tr>
                     <td>
-                        <%= log.getId() %>
+                        <%= attribute.getId() %>
 
                     </td>
                     <td style="word-wrap: break-word">
-                        <%= log.getPoruka() %>
+                        <%= attribute.getNaziv() %>
                     </td>
                     <td>
-                        <%=log.getLevel() %>
+                        <%=attribute.getTip() %>
                     </td>
-                    <td style="word-wrap: break-word">
-                        <%=log.getLog() %>
-                    </td>
-                    <td>
-                        <%=log.getDatum() %>
-                    </td>
+
 
                 </tr>
                 <% } %>

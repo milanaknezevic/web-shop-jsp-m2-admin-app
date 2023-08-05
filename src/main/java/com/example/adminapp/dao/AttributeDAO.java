@@ -15,7 +15,7 @@ public class AttributeDAO {
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
     private static final String INSERT= "INSERT INTO  webshop_ip.atribut (naziv,kategorija_id,tip) values (?,?,?);";
     private static final String UPDATE="UPDATE web_shop.user set name=?, type=? where id=?";
-    private static final String DELETE = "UPDATE  webshop_ip.atribut set naziv=?, tip=? where id=?;";
+    private static final String DELETE = "DELETE FROM webshop_ip.atribut WHERE id = ?;";
     private static final String SELECT_ALL_BY_CATEGORY_ID="SELECT * FROM webshop_ip.atribut a where a.kategorija_id=?;";
 
     public static boolean insertAttribute(Attribute attribute,Integer category_id) {
@@ -27,8 +27,8 @@ public class AttributeDAO {
             c = connectionPool.checkOut();
             ps = DAOUtil.prepareStatement(c, INSERT, false);
             ps.setString(1,attribute.getNaziv());
-            ps.setString(2,attribute.getTip());
-            ps.setInt(3,category_id);
+            ps.setString(3,attribute.getTip());
+            ps.setInt(2,category_id);
             result=ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class AttributeDAO {
             c = connectionPool.checkOut();
             ps =DAOUtil.prepareStatement(c, DELETE, false);
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -27,7 +27,6 @@
 <body>
 <%@include file="header.jsp" %>
 <br>
-<br>
 <div style="text-align: center"><h1>Update user</h1></div>
 <div class="card border-primary mb-3 center" style="max-width: 50rem;">
     <div class="card-body">
@@ -63,7 +62,7 @@
                            value="<%=userBean.getUser().getGrad()%>">
                 </div>
                 <div class="form-group">
-                    <label for="city">Role</label>
+                    <label for="rola">Role</label>
                     <select class="form-control" id="rola" name="rola" required>
                         <option value="0" <%= userBean.getUser().getRole() == Role.ADMIN ? "selected" : "" %>>Admin</option>
                         <option value="1" <%= userBean.getUser().getRole() == Role.KORISNICKA_PODRSKA ? "selected" : "" %>>Customer suport</option>
@@ -71,7 +70,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="city">Status</label>
+                    <label for="status">Status</label>
                     <select class="form-control" id="status" name="status" required>
                         <option value="0" <%= userBean.getUser().getStatus() == Status.REQUESTED ? "selected" : "" %>>Requested</option>
                         <option value="1" <%= userBean.getUser().getStatus() == Status.ACTIVE ? "selected" : "" %>>Active</option>

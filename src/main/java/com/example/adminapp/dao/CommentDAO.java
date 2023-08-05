@@ -46,7 +46,7 @@ public class CommentDAO {
             c = connectionPool.checkOut();
             ps = DAOUtil.prepareStatement(c, DELETE_COMMENT, false);
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

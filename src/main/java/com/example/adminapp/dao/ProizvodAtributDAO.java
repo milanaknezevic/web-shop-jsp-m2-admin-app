@@ -20,7 +20,7 @@ public class ProizvodAtributDAO {
             c = connectionPool.checkOut();
             ps = DAOUtil.prepareStatement(c, DELETE, false);
             ps.setInt(1, attributeId);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

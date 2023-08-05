@@ -1,16 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Milana
-  Date: 02.08.2023.
-  Time: 17:39
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %><html>
+<%@page isErrorPage="true"%>
+
 <head>
-    <title>Title</title>
+    <title>Error page</title>
 </head>
 <body>
+<div id="errorPage">
 
+    <div>
+        <h1>Sorry, your application encountered an error</h1>
+        <h2>Oops! Something went wrong</h2>
+        <button type="button" onclick="location.href='users.jsp'">Return To Home</button>
+    </div>
+</div>
+
+</div>
 </body>
 </html>

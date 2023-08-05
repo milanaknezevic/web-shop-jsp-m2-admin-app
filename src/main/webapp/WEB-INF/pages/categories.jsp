@@ -1,8 +1,8 @@
 <%@ page import="com.example.adminapp.models.User" %>
 <%@ page import="com.example.adminapp.beans.UserBean" %>
 <%@ page import="com.example.adminapp.dao.UserDAO" %>
-<%@ page import="com.example.adminapp.models.Log" %>
-<%@ page import="com.example.adminapp.dao.LogDAO" %>
+<%@ page import="com.example.adminapp.models.Category" %>
+<%@ page import="com.example.adminapp.dao.CategoryDAO" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,13 +23,12 @@
     <link rel="stylesheet" href="styles/users.css">
 
 
-    <title>Logs</title>
+    <title>Categories</title>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#myTable').DataTable(); // myTable je ID vaše tabele
         });
     </script>
-
 
 
 </head>
@@ -39,44 +38,65 @@
 <div class="container-lg" style="padding-top: 20px">
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div  class="table-title">
-                <div  class="row">
-                    <div  class="col-sm-6">
-                        <h2>Logs</h2>
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Categories</h2>
                     </div>
                 </div>
             </div>
 
+            <div style="margin-bottom: 10px">
+                <button type="button" class="mjau" onclick="location.href='?action=add-new-category'">
+                    <span class="fa fa-plus"></span>
+                    Add new category
+                </button>
+            </div>
             <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
                     <th style="color:  #1690A7" scope="col">Id</th>
-                    <th style="color:  #1690A7;width: fit-content" scope="col">Message</th>
-                    <th style="color:  #1690A7;width: 5%" scope="col">Level</th>
-                    <th style="color:  #1690A7;width: fit-content" scope="col">Log</th>
-                    <th style="color:  #1690A7" scope="col">Date</th>
-
+                    <th style="color:  #1690A7" scope="col">Name</th>
+                    <th style="color:  #1690A7" scope="col">Atributes</th>
+                    <th style="color:  #1690A7" scope="col">Actions</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Log log : LogDAO.getAllLogs()) {%>
+                <% for (Category category : CategoryDAO.getAllCategories()) {%>
                 <tr>
                     <td>
-                        <%= log.getId() %>
+                        <%= category.getId() %>
 
                     </td>
-                    <td style="word-wrap: break-word">
-                        <%= log.getPoruka() %>
+                    <td>
+                        <%= category.getNaziv() %>
                     </td>
                     <td>
-                        <%=log.getLevel() %>
+                        <div class="d-flex flex-row">
+                            <button style="width: fit-content" type="button" class="btn" title="View attributes"
+                                    onclick="location.href='?action=view-attributes&id=<%=category.getId()%>'">
+                                <span style="width: fit-content" class="fa fa-eye text-primary"></span>
+                            </button>
+
+                        </div>
                     </td>
-                    <td style="word-wrap: break-word">
-                        <%=log.getLog() %>
-                    </td>
+
                     <td>
-                        <%=log.getDatum() %>
+                        <div class="d-flex flex-row">
+
+                            <button style="width: fit-content" type="button" class="btn" title="Edit"
+                                    onclick="location.href='?action=update-user&id=<%=category.getId()%>'">
+                                <span style="width: fit-content" class="fa fa-pencil text-dark"></span>
+                            </button>
+
+
+                            <button style="width: fit-content" type="button" class="btn" title="Delete"
+                                    onclick="location.href='?action=delete-categories&id=<%=category.getId()%>'">
+                                <span style="width: fit-content" class="fa fa-trash text-danger"></span>
+                            </button>
+
+                        </div>
                     </td>
 
                 </tr>

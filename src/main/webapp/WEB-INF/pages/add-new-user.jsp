@@ -24,8 +24,7 @@
 <body>
 <%@include file="header.jsp" %>
 <br>
-<br>
-
+<div style="text-align: center"><h1>Add user</h1></div>
 <div class="card border-primary mb-3 center" style="max-width: 50rem;">
     <div class="card-body">
         <div class="card-body">
@@ -57,7 +56,7 @@
                     <input type="text" class="form-control" id="city" name="city" required>
                 </div>
                 <div class="form-group">
-                    <label for="city">Role</label>
+                    <label for="rola">Role</label>
                     <select class="form-control" id="rola" name="rola" required>
                         <option value="1">Customer suport</option>
                         <option value="2">Custom user</option>

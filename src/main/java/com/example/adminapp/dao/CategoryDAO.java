@@ -99,21 +99,29 @@ public class CategoryDAO {
         return category;
     }
 
-    public static boolean insert(Category category) {
+    public static int insert(Category category) {
         Connection connection = null;
+        int generatedId = -1; // Inicijalizujemo na -1 u slučaju da ne uspemo da dobijemo generisani ID
         boolean result = false;
         try {
             connection = connectionPool.checkOut();
-            PreparedStatement preparedStatement = DAOUtil.prepareStatement(connection, INSERT, false);
+            PreparedStatement preparedStatement = DAOUtil.prepareStatement(connection, INSERT, true);
             preparedStatement.setString(1, category.getNaziv());
-            result = preparedStatement.executeUpdate() == 1;
+            //result = preparedStatement.executeUpdate() == 1;
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1); // Pretpostavljamo da je ID kolona tipa LONG, možete koristiti getInt(1) za INT tip
+                }
+            }
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             connectionPool.checkIn(connection);
         }
-        return result;
+        return generatedId;
     }
 
     public static boolean updateCategory(Category category) {
@@ -149,7 +157,7 @@ public class CategoryDAO {
             c = connectionPool.checkOut();
             ps = DAOUtil.prepareStatement(c, DELETE_CATEGORY, false);
             ps.setInt(1, category.getId());
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

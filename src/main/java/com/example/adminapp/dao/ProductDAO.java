@@ -57,7 +57,7 @@ public class ProductDAO {
             c = connectionPool.checkOut();
             ps = DAOUtil.prepareStatement(c, DELETE_PRODUCT, false);
             ps.setInt(1, product.getId());
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

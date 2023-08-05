@@ -8,7 +8,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background: #1690A7">
-    <a class="navbar-brand" href="?action=logs" style="margin-left: 10px">Admin application</a>
+    <a class="navbar-brand" href="?action=logs" style="margin-left: 10px;font-size: 24px">Admin application</a>
     <div class="d-flex flex-fill justify-content-center">
         <ul class="navbar-nav d-flex flex-wrap">
             <li class="nav-item">
