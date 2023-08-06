@@ -1,0 +1,15 @@
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+.pom{
+    text-align: center
+}
+
+.wid{
+    max-width: 50rem;
+}
+.pad{
+    padding: 5px
+}

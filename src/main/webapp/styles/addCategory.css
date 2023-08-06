@@ -1,0 +1,32 @@
+.add-one {
+    color: green;
+    text-align: center;
+    font-weigth: bolder;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.delete {
+    color: white;
+    background-color: rgb(231, 76, 60);
+    text-align: center;
+    margin-top: 6px;
+    font-weight: 700;
+    border-radius: 5px;
+    min-width: 20px;
+    cursor: pointer;
+}
+.nzm{
+    margin-top: 40px;width: 30px;height: 30px
+}
+.submit{
+    padding: 5px;display: flex;justify-content: center
+}
+.dynamic-element {
+    margin-bottom: 0px;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+}

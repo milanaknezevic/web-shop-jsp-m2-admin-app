@@ -42,9 +42,15 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Attributes</h2>
+                        <h2>Attributes for '<%=categoryBean.getCategory().getNaziv()%>'</h2>
                     </div>
                 </div>
+            </div>
+            <div style="margin-bottom: 10px">
+                <button type="button" class="mjau" onclick="location.href='?action=add-new-attribute'">
+                    <span class="fa fa-plus"></span>
+                    Add new attribute
+                </button>
             </div>
 
             <table id="myTable" class="table table-striped">

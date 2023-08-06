@@ -13,7 +13,7 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-
+    <link rel="stylesheet" href="styles/addCategory.css">
     <script>
         $(document).ready(function () {
             //Clone the hidden element and shows it
@@ -33,37 +33,7 @@
         });
     </script>
 
-    <style>
-        .add-one {
-            color: green;
-            text-align: center;
-            font-weigth: bolder;
-            cursor: pointer;
-            margin-top: 10px;
-        }
 
-        .delete {
-            color: white;
-            background-color: rgb(231, 76, 60);
-            text-align: center;
-            margin-top: 6px;
-            font-weight: 700;
-            border-radius: 5px;
-            min-width: 20px;
-            cursor: pointer;
-        }
-
-
-        .dynamic-element {
-            margin-bottom: 0px;
-        }
-
-        .center {
-            margin: auto;
-            width: 50%;
-        }
-
-    </style>
 </head>
 <body>
 <%@include file="header.jsp" %>
@@ -87,7 +57,7 @@
 
 
         <div class="col-md-2">
-            <p style="margin-top: 40px;width: 30px;height: 30px" class="delete">x</p>
+            <p class="delete nzm">x</p>
         </div>
 
     </div>
@@ -120,7 +90,7 @@
                             </div>
 
                         </div>
-                        <div style="padding: 5px;display: flex;justify-content: center">
+                        <div class="submit">
                             <button id="submit" type="submit" name="submit" class="btn btn-primary">Add category
                             </button>
 

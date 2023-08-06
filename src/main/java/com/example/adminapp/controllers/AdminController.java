@@ -29,6 +29,7 @@ public class AdminController extends HttpServlet {
     private static final String VIEW_ATTRIBUTES = "/WEB-INF/pages/view-attributes.jsp";
     private static final String ADD_CATEGORY = "/WEB-INF/pages/add-new-category.jsp";
     private static final String UPDATE_CATEGORY = "/WEB-INF/pages/update-category.jsp";
+    private static final String ADD_ATTRIBUTE = "/WEB-INF/pages/add-new-attribute.jsp";
     private static final String ERROR = "/WEB-INF/pages/error.jsp";
 
     public AdminController() {
@@ -133,10 +134,9 @@ public class AdminController extends HttpServlet {
                         break;
                     case "view-attributes":
                         address = VIEW_ATTRIBUTES;
-                        Integer id3=Integer.parseInt(request.getParameter("id"));
-                        if(id3!=null)
-                        {
-                            Category category=categoryBean.getById(id3);
+                        Integer id3 = Integer.parseInt(request.getParameter("id"));
+                        if (id3 != null) {
+                            Category category = categoryBean.getById(id3);
                             categoryBean.setCategory(category);
                         }
                         break;
@@ -229,6 +229,28 @@ public class AdminController extends HttpServlet {
                         Category category1 = categoryBean.getById(categoryId);
                         categoryBean.setCategory(category1);
                         address = VIEW_ATTRIBUTES;
+                        break;
+                    case "add-new-attribute":
+                        address = ADD_ATTRIBUTE;
+                        if (request.getParameter("submit") != null) {
+                            int categoryId1 = Integer.parseInt(request.getParameter("id"));
+                            String type=request.getParameter("type");
+                            String tip = "";
+                            if (type.equals("0")) {
+                                tip = "STRING";
+                            } else if (type.equals("1")) {
+                                tip = "INT";
+                            } else {
+                                tip = "DOUBLE";
+                            }
+                            Attribute attribute = new Attribute(0, request.getParameter("name"), tip);
+                            if(attributeBean.insertAttribute(attribute, categoryId1))
+                            {
+                                Category category2 = categoryBean.getById(categoryId1);
+                                categoryBean.setCategory(category2);
+                                address=VIEW_ATTRIBUTES;
+                            }
+                        }
                         break;
                     default:
                         address = ERROR;

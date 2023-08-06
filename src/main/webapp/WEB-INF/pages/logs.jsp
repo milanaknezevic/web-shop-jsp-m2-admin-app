@@ -59,20 +59,20 @@
                 <tbody>
                 <% for (Log log : logBean.getAll()) {%>
                 <tr>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%= log.getId() %>
 
                     </td>
                     <td style="word-wrap: break-word">
                         <%= log.getPoruka() %>
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%=log.getLevel() %>
                     </td>
                     <td style="word-wrap: break-word">
                         <%=log.getLog() %>
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%=log.getDatum() %>
                     </td>
 

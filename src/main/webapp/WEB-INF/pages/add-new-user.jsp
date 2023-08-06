@@ -12,20 +12,15 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <link rel="stylesheet" href="styles/addUser.css">
 
 
-    <style>
-        .center {
-            margin: auto;
-            width: 50%;
-        }
-    </style>
 </head>
 <body>
 <%@include file="header.jsp" %>
 <br>
-<div style="text-align: center"><h1>Add user</h1></div>
-<div class="card border-primary mb-3 center" style="max-width: 50rem;">
+<div class="pom"><h1>Add user</h1></div>
+<div class="card border-primary mb-3 center wid" >
     <div class="card-body">
         <div class="card-body">
             <form method="POST" action="?action=add-new-user">
@@ -67,7 +62,7 @@
                     <input type="file" class="form-control" id="avatar" name="avatar" data-validation="mime size"
                            data-validation-allowing="jpg, png, gif" data-validation-max-size="10M">
                 </div>
-                <div style="padding: 5px">
+                <div class="pad">
                     <button id="submitBtn" type="submit" name="submit" class="btn btn-primary">Add user</button>
 
                 </div>

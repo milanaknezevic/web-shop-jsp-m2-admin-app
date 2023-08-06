@@ -5,6 +5,7 @@
     <title>Header</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/header.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background: #1690A7">
@@ -31,11 +32,7 @@
     </div>
 </nav>
 
-<style>
-    .navbar-nav .nav-link:hover {
-        color: #b9bed0 !important;
-    }
-</style>
+
 
 </body>
 </html>

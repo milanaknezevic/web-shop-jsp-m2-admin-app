@@ -60,7 +60,7 @@
                     <th style="width: 25%; color: #1690A7" scope="col">E-mail</th>
                     <th style="width: 15%;color:  #1690A7" scope="col">City</th>
                     <th style="color:  #1690A7;width: 25%;" scope="col">Role</th>
-                    <th style="width: 10%;color:  #1690A7" scope="col">Avatar</th>
+
                     <th style="width: 10%;color:  #1690A7" scope="col">Status</th>
                     <th style="width: 15%;color:  #1690A7" scope="col">Actions</th>
 
@@ -97,9 +97,7 @@
                         <p>User</p>
                         <% } %>
                     </td>
-                    <td style="word-wrap: break-word">
-                        <%=user.getAvatar()%>
-                    </td>
+
                     <td style="word-wrap: break-word">
                         <%= user.getStatus() %>
                     </td>

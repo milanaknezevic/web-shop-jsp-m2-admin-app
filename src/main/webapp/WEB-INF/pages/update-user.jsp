@@ -13,14 +13,10 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <link rel="stylesheet" href="styles/addUser.css">
 
 
-    <style>
-        .center {
-            margin: auto;
-            width: 50%;
-        }
-    </style>
+
 </head>
 <body>
 <%@include file="header.jsp" %>
