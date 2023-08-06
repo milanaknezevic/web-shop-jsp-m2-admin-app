@@ -1,5 +1,3 @@
-<%@ page import="com.example.adminapp.models.User" %>
-<%@ page import="com.example.adminapp.beans.UserBean" %>
 <%@ page import="com.example.adminapp.models.enums.Role" %>
 <%@ page import="com.example.adminapp.models.enums.Status" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

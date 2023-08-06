@@ -22,7 +22,7 @@ public class CategoryBean implements Serializable {
         return CategoryDAO.getAllCategories();
     }
 
-    public static Category getById(Integer id) {
+    public  Category getById(Integer id) {
         return CategoryDAO.getCategoryById(id);
     }
 

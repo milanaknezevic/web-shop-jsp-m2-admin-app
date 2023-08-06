@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.adminapp.beans.CategoryBean" %>
-<%@ page import="com.example.adminapp.models.Category" %>
 <%@ page import="com.example.adminapp.models.Attribute" %>
 <%@ page import="java.util.Objects" %>
 

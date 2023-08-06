@@ -1,11 +1,5 @@
-<%@ page import="com.example.adminapp.models.User" %>
-<%@ page import="com.example.adminapp.beans.UserBean" %>
-<%@ page import="com.example.adminapp.dao.UserDAO" %>
-<%@ page import="com.example.adminapp.models.Log" %>
-<%@ page import="com.example.adminapp.dao.LogDAO" %>
 <%@ page import="com.example.adminapp.models.Attribute" %>
-<%@ page import="com.example.adminapp.dao.AttributeDAO" %>
-
+<jsp:useBean id="categoryBean" type="com.example.adminapp.beans.CategoryBean" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +25,12 @@
             $('#myTable').DataTable(); // myTable je ID vaše tabele
         });
     </script>
-    <%
-        String categoryIdParam = request.getParameter("id");
-        int categoryId = Integer.parseInt(categoryIdParam);
-    %>
-
+    <script>
+        function deleteAttributeWithCategory(idAttr, categoryId) {
+            var url = '?action=delete-attribute&idAttr=' + idAttr + '&categoryId=' + categoryId;
+            location.href = url;
+        }
+    </script>
 
 </head>
 <body class="body">
@@ -63,7 +58,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Attribute attribute : AttributeDAO.getAttributesById(categoryId)) {%>
+                <% for (Attribute attribute : categoryBean.getCategory().getAtributi()) {%>
                 <tr>
                     <td>
                         <%= attribute.getId() %>
@@ -77,8 +72,9 @@
                     </td>
                     <td>
                         <div class="d-flex flex-row">
-                            <button style="width: fit-content" type="button" class="btn" title="Delete"
-                                    onclick="location.href='?action=delete-attribute&id=<%=attribute.getId()%>'">
+
+                            <button title="Delete" style="width: fit-content" type="button" class="btn"
+                                    onclick="deleteAttributeWithCategory(<%=attribute.getId()%>, <%=categoryBean.getCategory().getId()%>)">
                                 <span style="width: fit-content" class="fa fa-trash text-danger"></span>
                             </button>
 

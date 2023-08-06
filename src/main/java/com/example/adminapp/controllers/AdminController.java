@@ -1,7 +1,6 @@
 package com.example.adminapp.controllers;
 
 import com.example.adminapp.beans.*;
-import com.example.adminapp.dao.CategoryDAO;
 import com.example.adminapp.models.Attribute;
 import com.example.adminapp.models.Category;
 import com.example.adminapp.models.User;
@@ -134,10 +133,16 @@ public class AdminController extends HttpServlet {
                         break;
                     case "view-attributes":
                         address = VIEW_ATTRIBUTES;
+                        Integer id3=Integer.parseInt(request.getParameter("id"));
+                        if(id3!=null)
+                        {
+                            Category category=categoryBean.getById(id3);
+                            categoryBean.setCategory(category);
+                        }
                         break;
                     case "delete-categories":
                         int id1 = Integer.parseInt(request.getParameter("id"));
-                        Category category = CategoryBean.getById(id1);
+                        Category category = categoryBean.getById(id1);
                         categoryBean.deleteCategory(category);
                         address = CATEGORIES;
                         break;
@@ -151,11 +156,25 @@ public class AdminController extends HttpServlet {
                             int categoryId = categoryBean.addCategory(category1);
 
                             if (categoryId != -1) {
-                                if (attributeNames != null && attributeTypes != null) {
+                                System.out.println("attributeTypes " + attributeTypes);
+                                System.out.println("attributeNames " + attributeNames);
+                                if (attributeNames != null) {
                                     for (int i = 0; i < attributeNames.length; i++) {
                                         String attributeName = attributeNames[i];
-                                        String attributeType = attributeTypes[i];
-                                        Attribute attribute = new Attribute(0, attributeName, attributeType);
+                                        String attributeType = "";
+                                        if (attributeTypes != null) {
+                                            attributeType = attributeTypes[i];
+                                        } else attributeType = "0";
+                                        String tip = "";
+                                        if (attributeType.equals("0")) {
+                                            tip = "STRING";
+                                        } else if (attributeType.equals("1")) {
+                                            tip = "INT";
+                                        } else {
+                                            tip = "DOUBLE";
+                                        }
+                                        Attribute attribute = new Attribute(0, attributeName, tip);
+                                        System.out.println("attribute " + attribute);
                                         attributeBean.insertAttribute(attribute, categoryId);
 
                                     }
@@ -167,7 +186,7 @@ public class AdminController extends HttpServlet {
                     case "update-category":
                         address = UPDATE_CATEGORY;
                         int updateCategoryId = Integer.parseInt(request.getParameter("id"));
-                        Category updateCategory = CategoryBean.getById(updateCategoryId);
+                        Category updateCategory = categoryBean.getById(updateCategoryId);
                         categoryBean.setCategory(updateCategory);
                         if (request.getParameter("submit") != null) {
                             String categoryName1 = request.getParameter("name");
@@ -184,20 +203,16 @@ public class AdminController extends HttpServlet {
                                     String attributeName = request.getParameter("attributeName_" + attributeId);
                                     String attributeType = request.getParameter("type_" + attributeId);
                                     System.out.println("attributeType " + attributeType);
-                                    String tip="";
-                                    if(attributeType.equals("0"))
-                                    {
-                                        tip="STRING";
-                                    }
-                                    else if(attributeType.equals("1"))
-                                    {
-                                        tip="INT";
-                                    }
-                                    else {
-                                        tip="DOUBLE";
+                                    String tip = "";
+                                    if (attributeType.equals("0")) {
+                                        tip = "STRING";
+                                    } else if (attributeType.equals("1")) {
+                                        tip = "INT";
+                                    } else {
+                                        tip = "DOUBLE";
                                     }
 
-                                    Attribute attribute=new Attribute(attributeId,attributeName,tip);
+                                    Attribute attribute = new Attribute(attributeId, attributeName, tip);
                                     System.out.println("atribut " + attribute);
                                     attributeBean.update(attribute);
 
@@ -208,9 +223,11 @@ public class AdminController extends HttpServlet {
                         }
                         break;
                     case "delete-attribute":
-                        int id2 = Integer.parseInt(request.getParameter("id"));
-                        System.out.println("id atributa koji brisem " +id2);
+                        int id2 = Integer.parseInt(request.getParameter("idAttr"));
                         attributeBean.deleteAttribute(id2);
+                        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+                        Category category1 = categoryBean.getById(categoryId);
+                        categoryBean.setCategory(category1);
                         address = VIEW_ATTRIBUTES;
                         break;
                     default:

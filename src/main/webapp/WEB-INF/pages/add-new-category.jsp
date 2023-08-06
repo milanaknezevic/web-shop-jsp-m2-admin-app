@@ -5,7 +5,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Add user</title>
+    <title>Add category</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -34,7 +34,7 @@
     </script>
 
     <style>
-    .add-one {
+        .add-one {
             color: green;
             text-align: center;
             font-weigth: bolder;
@@ -58,41 +58,40 @@
             margin-bottom: 0px;
         }
 
-         .center {
-             margin: auto;
-             width: 50%;
-         }
+        .center {
+            margin: auto;
+            width: 50%;
+        }
 
     </style>
 </head>
 <body>
 <%@include file="header.jsp" %>
 <br>
-<!-- HIDDEN DYNAMIC ELEMENT TO CLONE -->
-<!-- you can replace it with any other elements -->
+
 <div class="form-group dynamic-element" style="display:none">
     <div class="row d-flex align-items-center">
-        <!-- Replace these fields -->
-        <!-- Replace these fields -->
         <div class="col-md-5">
             <label for="atribute_name">Attribute name</label>
             <input type="text" class="form-control" id="atribute_name" name="attribute_name[]" required>
         </div>
         <div class="col-md-5">
             <label for="atribute_type">Attribute type</label>
-            <input type="text" class="form-control" id="atribute_type" name="attribute_type[]" required>
+            <select class="form-control" id="atribute_type" name="atribute_type"
+                    required>
+                <option value="0">STRING</option>
+                <option value="1">INT</option>
+                <option value="2">DOUBLE</option>
+            </select>
         </div>
-        <!-- End of fields -->
+
 
         <div class="col-md-2">
             <p style="margin-top: 40px;width: 30px;height: 30px" class="delete">x</p>
         </div>
-        <!-- End of fields -->
+
     </div>
 </div>
-
-
-<!-- END OF HIDDEN ELEMENT -->
 
 
 <div style="text-align: center"><h1>Add category</h1></div>
@@ -101,7 +100,7 @@
         <div class="card-body">
             <form method="POST" action="?action=add-new-category">
                 <fieldset>
-                    <!-- Form Name -->
+
 
                     <div class="form-group">
                         <label for="name">Category name</label>
@@ -111,20 +110,20 @@
 
                     <div class="dynamic-stuff">
                         <!-- Dynamic element will be cloned here -->
-                        <!-- You can call clone function once if you want it to show it a first element-->
                     </div>
 
-                    <!-- Button -->
+
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="add-one">+ Add attributes</p>
                             </div>
-                            <div class="col-md-5"></div>
-                            <div style="padding: 5px">
-                                <button id="submit" type="submit" name="submit" class="btn btn-primary">Add category</button>
 
-                            </div>
+                        </div>
+                        <div style="padding: 5px;display: flex;justify-content: center">
+                            <button id="submit" type="submit" name="submit" class="btn btn-primary">Add category
+                            </button>
+
                         </div>
                     </div>
                 </fieldset>

@@ -1,8 +1,5 @@
-<%@ page import="com.example.adminapp.models.User" %>
-<%@ page import="com.example.adminapp.beans.UserBean" %>
-<%@ page import="com.example.adminapp.dao.UserDAO" %>
 <%@ page import="com.example.adminapp.models.Log" %>
-<%@ page import="com.example.adminapp.dao.LogDAO" %>
+<jsp:useBean id="logBean" type="com.example.adminapp.beans.LogBean" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -60,7 +57,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Log log : LogDAO.getAllLogs()) {%>
+                <% for (Log log : logBean.getAll()) {%>
                 <tr>
                     <td>
                         <%= log.getId() %>

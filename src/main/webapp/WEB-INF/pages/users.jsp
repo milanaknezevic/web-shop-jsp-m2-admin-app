@@ -1,6 +1,6 @@
 <%@ page import="com.example.adminapp.models.User" %>
-<%@ page import="com.example.adminapp.beans.UserBean" %>
-<%@ page import="com.example.adminapp.dao.UserDAO" %>
+<%@ page import="com.example.adminapp.models.enums.Role" %>
+<jsp:useBean id="userBean" type="com.example.adminapp.beans.UserBean" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -23,11 +23,10 @@
 
     <title>Users</title>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#myTable').DataTable(); // myTable je ID vaše tabele
         });
     </script>
-
 
 
 </head>
@@ -45,53 +44,63 @@
                 </div>
             </div>
 
-          <div style="margin-bottom: 10px">
-              <button type="button" class="mjau" onclick="location.href='?action=add-new-user'">
-                  <span class="fa fa-plus"></span>
-                  Add new user
-              </button>
-          </div>
+            <div style="margin-bottom: 10px">
+                <button type="button" class="mjau" onclick="location.href='?action=add-new-user'">
+                    <span class="fa fa-plus"></span>
+                    Add new user
+                </button>
+            </div>
             <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
-                    <th style="color:  #1690A7" scope="col">Id</th>
-                    <th style="color:  #1690A7" scope="col">First name</th>
-                    <th style="color:  #1690A7" scope="col">Last name</th>
-                    <th style="color:  #1690A7" scope="col">Username</th>
-                    <th style="width: 22%; color: #1690A7" scope="col">E-mail</th>
-                    <th style="color:  #1690A7" scope="col">City</th>
-                    <th style="color:  #1690A7" scope="col">Avatar URL</th>
-                    <th style="color:  #1690A7" scope="col">Status</th>
-                    <th style="color:  #1690A7" scope="col">Actions</th>
+                    <th style="width:5%;color:  #1690A7" scope="col">Id</th>
+                    <th style="width: 15%; color:  #1690A7" scope="col">First name</th>
+                    <th style="width: 15%; color:  #1690A7" scope="col">Last name</th>
+                    <th style="width: 25%; color:  #1690A7" scope="col">Username</th>
+                    <th style="width: 25%; color: #1690A7" scope="col">E-mail</th>
+                    <th style="width: 15%;color:  #1690A7" scope="col">City</th>
+                    <th style="color:  #1690A7;width: 25%;" scope="col">Role</th>
+                    <th style="width: 10%;color:  #1690A7" scope="col">Avatar</th>
+                    <th style="width: 10%;color:  #1690A7" scope="col">Status</th>
+                    <th style="width: 15%;color:  #1690A7" scope="col">Actions</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                <% for (User user : UserDAO.getAllUsers()) {%>
+                <% for (User user : userBean.getAll()) {%>
                 <tr>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%= user.getId() %>
 
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%= user.getIme() %>
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%=user.getPrezime() %>
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%= user.getKorisnicko_ime() %>
                     </td>
                     <td style="word-wrap: break-word">
                         <%=user.getEmail() %>
-                    </td>
+                    </td style="word-wrap: break-word">
                     <td>
                         <%=user.getGrad()%>
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
+                        <% if (user.getRole() == Role.ADMIN) { %>
+                        <p>Admin</p>
+                        <% } else if (user.getRole() == Role.KORISNICKA_PODRSKA) { %>
+                        <p>Customer support</p>
+                        <% } else { %>
+                        <p>User</p>
+                        <% } %>
+                    </td>
+                    <td style="word-wrap: break-word">
                         <%=user.getAvatar()%>
                     </td>
-                    <td>
+                    <td style="word-wrap: break-word">
                         <%= user.getStatus() %>
                     </td>
 

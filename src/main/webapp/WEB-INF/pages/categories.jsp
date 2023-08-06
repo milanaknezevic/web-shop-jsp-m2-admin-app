@@ -1,9 +1,5 @@
-<%@ page import="com.example.adminapp.models.User" %>
-<%@ page import="com.example.adminapp.beans.UserBean" %>
-<%@ page import="com.example.adminapp.dao.UserDAO" %>
 <%@ page import="com.example.adminapp.models.Category" %>
-<%@ page import="com.example.adminapp.dao.CategoryDAO" %>
-
+<jsp:useBean id="categoryBean" type="com.example.adminapp.beans.CategoryBean" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +59,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Category category : CategoryDAO.getAllCategories()) {%>
+                <% for (Category category : categoryBean.getAll()) {%>
                 <tr>
                     <td>
                         <%= category.getId() %>

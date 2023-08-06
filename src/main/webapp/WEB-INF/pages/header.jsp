@@ -32,9 +32,8 @@
 </nav>
 
 <style>
-    /* Promena boje teksta kada se stavi miš preko linka */
     .navbar-nav .nav-link:hover {
-        color: #b9bed0 !important; /* Ovde postavite željenu boju za hover efekat */
+        color: #b9bed0 !important;
     }
 </style>
 
