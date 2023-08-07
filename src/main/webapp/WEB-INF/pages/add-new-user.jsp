@@ -57,11 +57,6 @@
                         <option value="2">Custom user</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="avatar">Avatar</label>
-                    <input type="file" class="form-control" id="avatar" name="avatar" data-validation="mime size"
-                           data-validation-allowing="jpg, png, gif" data-validation-max-size="10M">
-                </div>
                 <div class="pad">
                     <button id="submitBtn" type="submit" name="submit" class="btn btn-primary">Add user</button>
 

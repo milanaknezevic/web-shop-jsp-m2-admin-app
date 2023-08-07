@@ -21,9 +21,9 @@ public class UserDAO {
 
     private static final String SELECT_ALL_USERS = "SELECT * FROM webshop_ip.korisnik";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM korisnik WHERE id=?;";
-    private static final String UPDATE_USER = "UPDATE webshop_ip.korisnik SET ime = ?, prezime = ?, korisnicko_ime =?, grad =?, avatar = ?, email = ?, rola = ?,status=? WHERE (id = ?);";
+    private static final String UPDATE_USER = "UPDATE webshop_ip.korisnik SET ime = ?, prezime = ?, korisnicko_ime =?, grad =?, email = ?, rola = ?,status=? WHERE (id = ?);";
     private static final String UPDATE_USER_STATUS = "UPDATE korisnik  SET status=? WHERE id=?;";
-    private static final String INSERT_USER = "INSERT INTO  webshop_ip.korisnik (ime, prezime, korisnicko_ime, lozinka, grad, avatar, email,rola, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String INSERT_USER = "INSERT INTO  webshop_ip.korisnik (ime, prezime, korisnicko_ime, lozinka, grad, email,rola, status) VALUES(?,  ?, ?, ?, ?, ?, ?, ?);";
 
     public UserDAO() {
     }
@@ -44,7 +44,6 @@ public class UserDAO {
                         rs.getString("korisnicko_ime"),
                         rs.getString("lozinka"),
                         rs.getString("grad"),
-                        rs.getString("avatar"),
                         rs.getString("email"),
                         Role.fromValue(rs.getInt("rola")), // Ovde koristimo metodu za mapiranje
                         Status.fromValue(rs.getInt("status"))));
@@ -76,7 +75,6 @@ public class UserDAO {
                         rs.getString("korisnicko_ime"),
                         rs.getString("lozinka"),
                         rs.getString("grad"),
-                        rs.getString("avatar"),
                         rs.getString("email"),
                         Role.fromValue(rs.getInt("rola")), // Ovde koristimo metodu za mapiranje
                         Status.fromValue(rs.getInt("status")));
@@ -100,13 +98,12 @@ public class UserDAO {
             preparedStatement.setString(2, user.getPrezime());
             preparedStatement.setString(3, user.getKorisnicko_ime());
             preparedStatement.setString(4, user.getGrad());
-            preparedStatement.setString(5, user.getAvatar());
-            preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setInt(7, Role.toValue(user.getRole()));
-            preparedStatement.setInt(8, Status.toValue(user.getStatus()));
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setInt(6, Role.toValue(user.getRole()));
+            preparedStatement.setInt(7, Status.toValue(user.getStatus()));
             // preparedStatement.setString(4, passwordEncoder.encode(user.getLozinka()));
             // preparedStatement.setInt(8, Status.toValue(user.getStatus()));
-            preparedStatement.setInt(9, user.getId());
+            preparedStatement.setInt(8, user.getId());
             result = preparedStatement.executeUpdate() == 1;
             preparedStatement.close();
         } catch (SQLException e) {
@@ -145,12 +142,11 @@ public class UserDAO {
             preparedStatement.setString(3, user.getKorisnicko_ime());
             preparedStatement.setString(4, passwordEncoder.encode(user.getLozinka()));
             preparedStatement.setString(5, user.getGrad());
-            preparedStatement.setString(6, user.getAvatar());
-            preparedStatement.setString(7, user.getEmail());
+            preparedStatement.setString(6, user.getEmail());
             //preparedStatement.setString(8, user.getRole().toString());
             //preparedStatement.setString(9, user.getStatus().toString());
-            preparedStatement.setInt(8, Role.toValue(user.getRole()));
-            preparedStatement.setInt(9, Status.toValue(user.getStatus()));
+            preparedStatement.setInt(7, Role.toValue(user.getRole()));
+            preparedStatement.setInt(8, Status.toValue(user.getStatus()));
             result = preparedStatement.executeUpdate() == 1;
 
             preparedStatement.close();

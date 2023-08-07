@@ -10,7 +10,6 @@ public class User {
     private String korisnicko_ime;
     private String lozinka;
     private String grad;
-    private String avatar;
     private String email;
     private Role role;
     private Status status;
@@ -19,14 +18,13 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String avatar, String email, Role role, Status status) {
+    public User(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String email, Role role, Status status) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.korisnicko_ime = korisnicko_ime;
         this.lozinka = lozinka;
         this.grad = grad;
-        this.avatar = avatar;
         this.email = email;
         this.role = role;
         this.status = status;
@@ -80,13 +78,6 @@ public class User {
         this.grad = grad;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 
     public String getEmail() {
         return email;
@@ -121,7 +112,6 @@ public class User {
                 ", korisnicko_ime='" + korisnicko_ime + '\'' +
                 ", lozinka='" + lozinka + '\'' +
                 ", grad='" + grad + '\'' +
-                ", avatar='" + avatar + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
                 ", status=" + status +

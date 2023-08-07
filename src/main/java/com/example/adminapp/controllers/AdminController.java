@@ -88,7 +88,7 @@ public class AdminController extends HttpServlet {
                             Role role = Role.fromValue(Integer.parseInt(roleValue));
                             User user = new User(0, request.getParameter("firstName"), request.getParameter("lastName"),
                                     request.getParameter("username"), request.getParameter("password"),
-                                    request.getParameter("city"), request.getParameter("avatar"),
+                                    request.getParameter("city"),
                                     request.getParameter("email"),
                                     role, Status.ACTIVE);
                             System.out.println("user" + user);
@@ -112,7 +112,7 @@ public class AdminController extends HttpServlet {
 
                             User user = new User(updateId, request.getParameter("firstName"), request.getParameter("lastName"),
                                     request.getParameter("username"), updateUser.getLozinka(), request.getParameter("city"),
-                                    request.getParameter("avatar"), request.getParameter("email"), role, status);
+                                    request.getParameter("email"), role, status);
                             System.out.println("status" + status);
                             if (userBean.update(user)) {
                                 address = USERS;

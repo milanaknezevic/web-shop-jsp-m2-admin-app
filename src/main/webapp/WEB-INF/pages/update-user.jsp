@@ -72,13 +72,9 @@
                         <option value="2" <%= userBean.getUser().getStatus() == Status.BLOCKED ? "selected" : "" %>>Blocked</option>
                     </select>
                 </div>
-                <div class="form-group" style="padding-bottom: 5px">
-                    <label for="avatar">Avatar</label>
-                    <input type="file" class="form-control" id="avatar" name="avatar" data-validation="mime size"
-                           data-validation-allowing="jpg, png, gif" data-validation-max-size="10M"
-                           value="<%=userBean.getUser().getAvatar()%>">
+                <div class="pad">
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
