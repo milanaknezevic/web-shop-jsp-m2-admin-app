@@ -26,9 +26,6 @@ public class CategoryBean implements Serializable {
         return CategoryDAO.getCategoryById(id);
     }
 
-    public static Category getByName(String name) {
-        return CategoryDAO.getCategoryByName(name);
-    }
 
     public int addCategory(Category category) {
         return CategoryDAO.insert(category);

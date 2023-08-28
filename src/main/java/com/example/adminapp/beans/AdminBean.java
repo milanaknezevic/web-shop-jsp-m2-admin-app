@@ -23,8 +23,6 @@ public class AdminBean implements Serializable {
         } else {
             return false;
         }
-        // return admin != null && bCryptPasswordEncoder.matches(password, admin.getLozinka());
-
     }
 
     public boolean isLoggedIn() {

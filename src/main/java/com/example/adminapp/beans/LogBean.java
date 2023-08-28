@@ -8,8 +8,6 @@ import java.util.List;
 
 public class LogBean implements Serializable {
 
-    private Log log;
-
     public List<Log> getAll() {
         return LogDAO.getAllLogs();
     }

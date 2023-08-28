@@ -87,7 +87,6 @@ public class AdminController extends HttpServlet {
                                     request.getParameter("city"),
                                     request.getParameter("email"),
                                     Status.ACTIVE);
-                            System.out.println("user" + user);
 
                             if (userBean.addUser(user)) {
                                 address = USERS;
@@ -100,13 +99,12 @@ public class AdminController extends HttpServlet {
                         User updateUser = userBean.getById(updateId);
                         userBean.setUser(updateUser);
                         if (request.getParameter("submit") != null) {
-                           String statusValue = request.getParameter("status");
+                            String statusValue = request.getParameter("status");
                             Status status = Status.fromValue(Integer.parseInt(statusValue));
 
                             User user = new User(updateId, request.getParameter("firstName"), request.getParameter("lastName"),
                                     request.getParameter("username"), updateUser.getLozinka(), request.getParameter("city"),
                                     request.getParameter("email"), status);
-                            System.out.println("status" + status);
                             if (userBean.update(user)) {
                                 address = USERS;
                             }
@@ -149,8 +147,6 @@ public class AdminController extends HttpServlet {
                             int categoryId = categoryBean.addCategory(category1);
 
                             if (categoryId != -1) {
-                                System.out.println("attributeTypes " + attributeTypes);
-                                System.out.println("attributeNames " + attributeNames);
                                 if (attributeNames != null) {
                                     for (int i = 0; i < attributeNames.length; i++) {
                                         String attributeName = attributeNames[i];
@@ -167,7 +163,6 @@ public class AdminController extends HttpServlet {
                                             tip = "DOUBLE";
                                         }
                                         Attribute attribute = new Attribute(0, attributeName, tip);
-                                        System.out.println("attribute " + attribute);
                                         attributeBean.insertAttribute(attribute, categoryId);
 
                                     }
@@ -195,7 +190,6 @@ public class AdminController extends HttpServlet {
                                     int attributeId = Integer.parseInt(paramName.substring("attributeName_".length()));
                                     String attributeName = request.getParameter("attributeName_" + attributeId);
                                     String attributeType = request.getParameter("type_" + attributeId);
-                                    System.out.println("attributeType " + attributeType);
                                     String tip = "";
                                     if (attributeType.equals("0")) {
                                         tip = "STRING";
@@ -206,7 +200,6 @@ public class AdminController extends HttpServlet {
                                     }
 
                                     Attribute attribute = new Attribute(attributeId, attributeName, tip);
-                                    System.out.println("atribut " + attribute);
                                     attributeBean.update(attribute);
 
                                 }
@@ -227,7 +220,7 @@ public class AdminController extends HttpServlet {
                         address = ADD_ATTRIBUTE;
                         if (request.getParameter("submit") != null) {
                             int categoryId1 = Integer.parseInt(request.getParameter("id"));
-                            String type=request.getParameter("type");
+                            String type = request.getParameter("type");
                             String tip = "";
                             if (type.equals("0")) {
                                 tip = "STRING";
@@ -237,11 +230,10 @@ public class AdminController extends HttpServlet {
                                 tip = "DOUBLE";
                             }
                             Attribute attribute = new Attribute(0, request.getParameter("name"), tip);
-                            if(attributeBean.insertAttribute(attribute, categoryId1))
-                            {
+                            if (attributeBean.insertAttribute(attribute, categoryId1)) {
                                 Category category2 = categoryBean.getById(categoryId1);
                                 categoryBean.setCategory(category2);
-                                address=VIEW_ATTRIBUTES;
+                                address = VIEW_ATTRIBUTES;
                             }
                         }
                         break;

@@ -13,9 +13,6 @@ import java.util.List;
 public class AttributeBean implements Serializable {
     public AttributeBean() {
     }
-    public List<Attribute> getAttributesById(Integer id) {
-        return AttributeDAO.getAttributesById(id);
-    }
 
     public boolean insertAttribute(Attribute attribute, Integer category_id) {
         return AttributeDAO.insertAttribute(attribute,category_id);
