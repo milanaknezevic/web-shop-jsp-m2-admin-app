@@ -53,7 +53,7 @@
                     <button id="submitBtn" type="submit" name="submit" class="btn btn-primary"
                             onclick="addAtributeIntoCategory(<%=categoryBean.getCategory().getId()%>)">
 
-                    Add category</button>
+                    Add attribute</button>
 
                 </div>
             </form>

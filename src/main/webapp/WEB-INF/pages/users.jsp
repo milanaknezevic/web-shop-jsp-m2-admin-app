@@ -1,5 +1,4 @@
 <%@ page import="com.example.adminapp.models.User" %>
-<%@ page import="com.example.adminapp.models.enums.Role" %>
 <jsp:useBean id="userBean" type="com.example.adminapp.beans.UserBean" scope="session"/>
 
 <!DOCTYPE html>

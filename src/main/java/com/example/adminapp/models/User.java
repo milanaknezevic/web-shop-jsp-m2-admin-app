@@ -1,6 +1,5 @@
 package com.example.adminapp.models;
 
-import com.example.adminapp.models.enums.Role;
 import com.example.adminapp.models.enums.Status;
 
 public class User {

@@ -1,9 +1,6 @@
 package com.example.adminapp.dao;
 
 import com.example.adminapp.models.Attribute;
-import com.example.adminapp.models.User;
-import com.example.adminapp.models.enums.Role;
-import com.example.adminapp.models.enums.Status;
 import com.example.adminapp.util.ConnectionPool;
 import com.example.adminapp.util.DAOUtil;
 

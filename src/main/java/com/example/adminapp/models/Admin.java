@@ -1,7 +1,5 @@
 package com.example.adminapp.models;
 
-import com.example.adminapp.models.enums.Role;
-import com.example.adminapp.models.enums.Status;
 import lombok.Getter;
 
 public class Admin {
