@@ -11,14 +11,13 @@ public class User {
     private String lozinka;
     private String grad;
     private String email;
-    private Role role;
     private Status status;
 
 
     public User() {
     }
 
-    public User(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String email, Role role, Status status) {
+    public User(Integer id, String ime, String prezime, String korisnicko_ime, String lozinka, String grad, String email, Status status) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -26,7 +25,6 @@ public class User {
         this.lozinka = lozinka;
         this.grad = grad;
         this.email = email;
-        this.role = role;
         this.status = status;
     }
 
@@ -87,13 +85,6 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     public Status getStatus() {
         return status;
@@ -113,7 +104,6 @@ public class User {
                 ", lozinka='" + lozinka + '\'' +
                 ", grad='" + grad + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
                 ", status=" + status +
                 '}';
     }

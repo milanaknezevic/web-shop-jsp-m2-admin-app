@@ -84,13 +84,11 @@ public class AdminController extends HttpServlet {
                     case "add-new-user":
                         address = ADD_USER;
                         if (request.getParameter("submit") != null) {
-                            String roleValue = request.getParameter("rola");
-                            Role role = Role.fromValue(Integer.parseInt(roleValue));
                             User user = new User(0, request.getParameter("firstName"), request.getParameter("lastName"),
                                     request.getParameter("username"), request.getParameter("password"),
                                     request.getParameter("city"),
                                     request.getParameter("email"),
-                                    role, Status.ACTIVE);
+                                    Status.ACTIVE);
                             System.out.println("user" + user);
 
                             if (userBean.addUser(user)) {
@@ -104,15 +102,12 @@ public class AdminController extends HttpServlet {
                         User updateUser = userBean.getById(updateId);
                         userBean.setUser(updateUser);
                         if (request.getParameter("submit") != null) {
-                            String roleValue = request.getParameter("rola");
-                            Role role = Role.fromValue(Integer.parseInt(roleValue));
-
-                            String statusValue = request.getParameter("status");
+                           String statusValue = request.getParameter("status");
                             Status status = Status.fromValue(Integer.parseInt(statusValue));
 
                             User user = new User(updateId, request.getParameter("firstName"), request.getParameter("lastName"),
                                     request.getParameter("username"), updateUser.getLozinka(), request.getParameter("city"),
-                                    request.getParameter("email"), role, status);
+                                    request.getParameter("email"), status);
                             System.out.println("status" + status);
                             if (userBean.update(user)) {
                                 address = USERS;

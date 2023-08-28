@@ -57,14 +57,6 @@
                            value="<%=userBean.getUser().getGrad()%>">
                 </div>
                 <div class="form-group">
-                    <label for="rola">Role</label>
-                    <select class="form-control" id="rola" name="rola" required>
-                        <option value="0" <%= userBean.getUser().getRole() == Role.ADMIN ? "selected" : "" %>>Admin</option>
-                        <option value="1" <%= userBean.getUser().getRole() == Role.KORISNICKA_PODRSKA ? "selected" : "" %>>Customer suport</option>
-                        <option value="2" <%= userBean.getUser().getRole() == Role.OBICNI_KORISNIK ? "selected" : "" %>>Custom user</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" id="status" name="status" required>
                         <option value="0" <%= userBean.getUser().getStatus() == Status.REQUESTED ? "selected" : "" %>>Requested</option>

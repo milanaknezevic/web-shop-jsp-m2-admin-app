@@ -50,13 +50,6 @@
                     <label for="city">City</label>
                     <input type="text" class="form-control" id="city" name="city" required>
                 </div>
-                <div class="form-group">
-                    <label for="rola">Role</label>
-                    <select class="form-control" id="rola" name="rola" required>
-                        <option value="1">Customer suport</option>
-                        <option value="2">Custom user</option>
-                    </select>
-                </div>
                 <div class="pad">
                     <button id="submitBtn" type="submit" name="submit" class="btn btn-primary">Add user</button>
 
